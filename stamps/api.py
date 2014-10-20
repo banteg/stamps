@@ -30,3 +30,14 @@ def stamp(wns):
         abort(404)
 
     return jsonify(data)
+
+
+@api.route('/themes')
+def themes():
+    themes = db.stamps.distinct('primary_theme')
+    primary_themes = [t for t in themes if not '(' in t]
+    data = {
+        'primary_themes': primary_themes,
+        'themes': themes,
+    }
+    return jsonify(data)
