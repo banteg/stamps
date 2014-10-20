@@ -8,17 +8,14 @@
             <strong>themes</strong>
         </div>
         <div class="pure-u-4-5">
-            {% for row in themes | batch(3) %}
-                {% set i = loop.index0 %}
-                <div class="pure-g gap-1">
-                    {% for theme in row %}
-                    <div class="pure-u-1-3">
-                        <span class="number">{{ i * 3 + loop.index }}</span>
-                        {{ theme }}
-                    </div>
-                    {% endfor %}
+            <div class="pure-g">
+                {% for theme in themes %}
+                <div class="pure-u-1-3 gap-1">
+                    <span class="number">{{ loop.index }}</span>
+                    {{ theme }}
                 </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 
@@ -27,17 +24,14 @@
             <strong>countires</strong>
         </div>
         <div class="pure-u-4-5">
-            {% for row in countries | batch(3) %}
-                {% set i = loop.index0 %}
-                <div class="pure-g gap-1">
-                    {% for country in row %}
-                    <div class="pure-u-1-3">
-                        <span class="number">{{ i * 3 + loop.index }}</span>
-                        {{ country }}
-                    </div>
-                    {% endfor %}
+                <div class="pure-g">
+                {% for country in countries %}
+                <div class="pure-u-1-3 gap-1">
+                    <span class="number">{{ loop.index }}</span>
+                    {{ country }}
                 </div>
-            {% endfor %}
+                {% endfor %}
+                </div>
         </div>
     </div>
 {% endblock %}
