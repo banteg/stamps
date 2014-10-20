@@ -41,3 +41,24 @@ def themes():
         'themes': themes,
     }
     return jsonify(data)
+
+
+@api.route('/search', methods=['POST'])
+def search():
+    query = request.get_json()
+    skip = int(query.get('skip', 0))
+    limit = int(query.get('limit', 10))
+    limit = min(limit, 100)
+    query.pop('skip', None)
+    query.pop('limit', None)
+
+    results = db.stamps.find(query).skip(skip).limit(limit)
+    count = results.count()
+
+    data = {
+        'count': count,
+        'skip': skip,
+        'limit': limit,
+        'data': list(results),
+    }
+    return jsonify(data)
