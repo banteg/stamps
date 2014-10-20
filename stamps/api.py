@@ -40,6 +40,15 @@ def themes():
     return data
 
 
+def countries():
+    countries = db.stamps.distinct('country')
+    data = {
+        'countries': countries,
+    }
+
+    return data
+
+
 def search(query):
     skip = int(query.get('skip', 0))
     limit = int(query.get('limit', 10))
@@ -72,6 +81,12 @@ def stamp_route(wns):
 @api.route('/themes')
 def themes_route():
     data = themes()
+    return jsonify(data)
+
+
+@api.route('/countries')
+def countries_route():
+    data = countries()
     return jsonify(data)
 
 
