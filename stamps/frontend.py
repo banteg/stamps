@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 from pymongo import MongoClient
 
 
@@ -10,4 +10,5 @@ db = mongo.stamps
 
 @frontend.route('/')
 def index():
-    return 'Hello'
+    countries = db.stamps.distinct('country')
+    return render_template('index.html', countries=countries)
