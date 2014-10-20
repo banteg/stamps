@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='stamps',
-    version='0.0.5-dev',
+    version='0.0.6-dev',
     url='https://github.com/banteg/stamps',
 
     packages=['stamps'],
