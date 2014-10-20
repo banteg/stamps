@@ -46,6 +46,9 @@ def themes():
 @api.route('/search', methods=['POST'])
 def search():
     query = request.get_json()
+    if not query:
+        return abort(404)
+
     skip = int(query.get('skip', 0))
     limit = int(query.get('limit', 10))
     limit = min(limit, 100)
