@@ -1,15 +1,11 @@
 from flask import Flask
-from pymongo import MongoClient
+
+from stamps.api import api
 
 
 app = Flask(__name__)
-mongo = MongoClient()
-db = mongo.stamps
-
-
-@app.route('/')
-def index():
-    ...
+app.config.update(JSON_AS_ASCII=False)
+app.register_blueprint(api, url_prefix='/api')
 
 
 def main():
