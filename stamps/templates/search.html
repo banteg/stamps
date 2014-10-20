@@ -39,8 +39,8 @@
             <div class="pure-u-1-3 gap-2" ng-repeat="stamp in results.data">
             {% raw %}
             <div class="g">
-            <img class="pure-img gap-1" src="{{ stamp.image }}">
             <a href="/stamp/{{ stamp._id }}">
+            <img class="pure-img gap-1" src="{{ stamp.image['250'] }}">
             <div class="gap-1">{{ stamp.subject }}</div>
             </a>
             <div class="secondary">{{ stamp.country }}
