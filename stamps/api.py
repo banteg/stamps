@@ -30,8 +30,8 @@ def stamp(wns):
 
 
 def themes():
-    themes = db.stamps.distinct('primary_theme')
-    primary_themes = [t for t in themes if not '(' in t]
+    primary_themes = db.stamps.distinct('primary_theme')
+    themes = db.stamps.distinct('theme')
     data = {
         'primary_themes': primary_themes,
         'themes': themes,
