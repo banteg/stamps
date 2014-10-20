@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, abort
 from pymongo import MongoClient
+
+from stamps import api
 
 
 frontend = Blueprint('frontend', __name__)
@@ -17,3 +19,12 @@ def index():
     return render_template('index.html',
                            countries=countries,
                            themes=primary_themes)
+
+
+@frontend.route('/stamp/<wns>')
+def stamp(wns):
+    stamp = api.stamp(wns)
+    if not stamp:
+        abort(404)
+
+    return render_template('stamp.html', stamp=stamp)
