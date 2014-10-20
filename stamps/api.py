@@ -17,22 +17,18 @@ def bsonify(data):
                     mimetype='application/json')
 
 
-@api.route('/stamp/<wns>')
 def stamp(wns):
     if not wns_re.match(wns):
-        abort(404)
-
-    country, serial, year = wns_re.search(wns).groups()
+        return None
 
     try:
         data = next(db.stamps.find({'_id': wns}))
     except StopIteration:
-        abort(404)
+        return None
 
-    return jsonify(data)
+    return data
 
 
-@api.route('/themes')
 def themes():
     themes = db.stamps.distinct('primary_theme')
     primary_themes = [t for t in themes if not '(' in t]
@@ -40,14 +36,13 @@ def themes():
         'primary_themes': primary_themes,
         'themes': themes,
     }
-    return jsonify(data)
+
+    return data
 
 
-@api.route('/search', methods=['POST'])
-def search():
-    query = request.get_json()
+def search(query):
     if not query:
-        return abort(404)
+        return None
 
     skip = int(query.get('skip', 0))
     limit = int(query.get('limit', 10))
@@ -64,4 +59,30 @@ def search():
         'limit': limit,
         'data': list(results),
     }
+
+    return data
+
+
+@api.route('/stamp/<wns>')
+def stamp_route(wns):
+    data = stamp(wns)
+
+    if not data:
+        abort(404)
+    return jsonify(data)
+
+
+@api.route('/themes')
+def themes_route():
+    data = themes()
+    return jsonify(data)
+
+
+@api.route('/search', methods=['POST'])
+def search_route():
+    query = request.get_json()
+    data = search(query)
+
+    if not data:
+        return abort(404)
     return jsonify(data)
