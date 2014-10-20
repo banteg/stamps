@@ -21,6 +21,11 @@ def index():
                            themes=primary_themes)
 
 
+@frontend.route('/search')
+def search():
+    return render_template('search.html')
+
+
 @frontend.route('/stamp/<wns>')
 def stamp(wns):
     stamp = api.stamp(wns)
