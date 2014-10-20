@@ -41,9 +41,6 @@ def themes():
 
 
 def search(query):
-    if not query:
-        return None
-
     skip = int(query.get('skip', 0))
     limit = int(query.get('limit', 10))
     limit = min(limit, 100)
@@ -81,8 +78,8 @@ def themes_route():
 @api.route('/search', methods=['POST'])
 def search_route():
     query = request.get_json()
-    data = search(query)
+    if not query:
+        query = {}
 
-    if not data:
-        return abort(404)
+    data = search(query)
     return jsonify(data)
