@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 from flask import Blueprint, Response, abort, request, jsonify
 from pymongo import MongoClient
@@ -49,6 +50,15 @@ def countries():
     return data
 
 
+def year_filter(query):
+    year = query.pop('year')
+    query['date'] = {
+        '$gte': datetime(year, 1, 1),
+        '$lt': datetime(year + 1, 1, 1)
+    }
+    return query
+
+
 def search(query):
     skip = int(query.get('skip', 0))
     limit = int(query.get('limit', 10))
@@ -56,6 +66,8 @@ def search(query):
     query.pop('skip', None)
     query.pop('limit', None)
     query = {k: v for k, v in query.items() if v}
+    if 'year' in query:
+        query = year_filter(query)
 
     results = db.stamps.find(query).skip(skip).limit(limit)
     count = results.count()

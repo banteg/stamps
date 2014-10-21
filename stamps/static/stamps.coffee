@@ -9,10 +9,12 @@ app.controller('SearchCtrl', ($scope, $http) ->
 
     $scope.countries = []
     $scope.themes = []
+    $scope.years = [2002..2014]
+    $scope.years.unshift(null)
 
     $http.get('/api/countries').success((data) ->
         $scope.countries = data.countries
-        $scope.countries.unshift('')
+        $scope.countries.unshift(null)
         console.log(data)
     )
 
