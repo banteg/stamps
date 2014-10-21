@@ -2,6 +2,7 @@ app = angular.module('stamps', [])
 
 app.controller('SearchCtrl', ($scope, $http) ->
     $scope.results = []
+    $scope.busy = true
     $scope.filters = {
         limit: 15
     }
@@ -11,6 +12,7 @@ app.controller('SearchCtrl', ($scope, $http) ->
 
     $http.get('/api/countries').success((data) ->
         $scope.countries = data.countries
+        $scope.countries.unshift('')
         console.log(data)
     )
 
@@ -21,9 +23,12 @@ app.controller('SearchCtrl', ($scope, $http) ->
 
 
     search = (new_val, old_val, scope) ->
+        $scope.results = []
+        $scope.busy = true
         $http.post('/api/search', $scope.filters).success((data) ->
             console.log($scope.filters)
             $scope.results = data
+            $scope.busy = false
             console.log(data)
         )
 
