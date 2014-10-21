@@ -1,6 +1,6 @@
-app = angular.module('stamps', [])
+app = angular.module 'stamps', []
 
-app.controller('SearchCtrl', ($scope, $http) ->
+app.controller 'SearchCtrl', ($scope, $http) ->
     $scope.results = {
         count: 0
     }
@@ -16,16 +16,14 @@ app.controller('SearchCtrl', ($scope, $http) ->
     $scope.years = [2002..2014]
     $scope.years.unshift(null)
 
-    $http.get('/api/countries').success((data) ->
+    $http.get('/api/countries').success (data) ->
         $scope.countries = data.countries
         $scope.countries.unshift(null)
         console.log(data)
-    )
 
-    $http.get('/api/themes').success((data) ->
+    $http.get('/api/themes').success (data) ->
         $scope.themes = data.themes
         console.log(data)
-    )
 
     search = (new_val, old_val, scope) ->
         $scope.busy = true
@@ -45,7 +43,6 @@ app.controller('SearchCtrl', ($scope, $http) ->
         $scope.stamps = []
 
     $scope.$watchCollection('filters', search)
-)
 
 
 app.directive 'whenScrolled', ($window) ->
