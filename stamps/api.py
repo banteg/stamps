@@ -55,6 +55,7 @@ def search(query):
     limit = min(limit, 100)
     query.pop('skip', None)
     query.pop('limit', None)
+    query = {k: v for k, v in query.items() if v}
 
     results = db.stamps.find(query).skip(skip).limit(limit)
     count = results.count()
