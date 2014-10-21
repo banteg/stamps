@@ -1,5 +1,5 @@
 # stamps
 
-Explore [WNS stamps](http://wnsstamps.post/) and be enraptured with clean design and nice API. See bunch of screenshots in docs folder.
+Explore [WNS stamps](http://wnsstamps.post/) collection in a modern way.
 
-Built with Python/Flask, MongoDB and CoffeeScript/AngularJS.
+Built with Python/Flask, MongoDB and CoffeeScript/AngularJS. Feauturing filters, instant search, infinite scrolling and RESTful API.
