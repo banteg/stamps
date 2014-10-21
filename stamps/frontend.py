@@ -21,7 +21,7 @@ def index():
                            themes=primary_themes)
 
 
-@frontend.route('/search')
+@frontend.route('/explore')
 def search():
     return render_template('search.html')
 

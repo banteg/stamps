@@ -1,18 +1,40 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h1>stamps</h1>
+    <div class="pure-g">
+        <div class="pure-u-1-5">
+            <div class="cell">
+                <h1>stamps</h1>
+            </div>
+        </div>
+
+        <div class="pure-u-4-5">
+            <div class="pure-g">
+                <div class="pure-u-2-3">
+                    <div class="cell">
+                        <a href="{{ url_for('frontend.search') }}">
+                        <h1>explore</h1>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="pure-g gap-2">
         <div class="pure-u-1-5">
-            <strong>themes</strong>
+            <div class="cell">
+                <strong>themes</strong>
+            </div>
         </div>
         <div class="pure-u-4-5">
             <div class="pure-g">
                 {% for theme in themes %}
                 <div class="pure-u-1-3 gap-1">
-                    <span class="number">{{ loop.index }}</span>
-                    {{ theme }}
+                    <div class="cell">
+                        <span class="number">{{ loop.index }}</span>
+                        {{ theme }}
+                    </div>
                 </div>
                 {% endfor %}
             </div>
@@ -21,14 +43,18 @@
 
     <div class="pure-g gap-2">
         <div class="pure-u-1-5">
-            <strong>countires</strong>
+            <div class="cell">
+                <strong>countires</strong>
+            </div>
         </div>
         <div class="pure-u-4-5">
                 <div class="pure-g">
                 {% for country in countries %}
                 <div class="pure-u-1-3 gap-1">
-                    <span class="number">{{ loop.index }}</span>
-                    {{ country }}
+                    <div class="cell">
+                        <span class="number">{{ loop.index }}</span>
+                        {{ country }}
+                    </div>
                 </div>
                 {% endfor %}
                 </div>
