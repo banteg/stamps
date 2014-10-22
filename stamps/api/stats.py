@@ -10,9 +10,10 @@ def theme():
         {'$group': {
             '_id': '$theme',
             'count': {'$sum': 1}
-        }}
+        }},
+        {'$sort': {'count': -1}},
     ])
-    return q
+    return q['result']
 
 
 def country():
@@ -20,9 +21,10 @@ def country():
         {'$group': {
             '_id': '$country',
             'count': {'$sum': 1}
-        }}
+        }},
+        {'$sort': {'count': -1}},
     ])
-    return q
+    return q['result']
 
 
 def year():
@@ -30,6 +32,7 @@ def year():
         {'$group': {
             '_id': {'$year': '$date'},
             'count': {'$sum': 1}
-        }}
+        }},
+        {'$sort': {'count': -1}},
     ])
-    return q
+    return q['result']
