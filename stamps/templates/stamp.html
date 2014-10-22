@@ -1,193 +1,103 @@
-{% extends "base.html" %}
+-inherit base.html
 
-{% block body %}
-
-<div class="pure-g">
-    <!-- subject -->
-    <div class="pure-u-1">
-        <div class="cell">
-            <h1>{{ stamp.subject }}</h1>
-        </div>
-    </div>
-
-    <!-- image -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>image</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-2">
-        <div class="cell">
-            <img class="stamp-img" src="{{ stamp.image.full }}">
-        </div>
-    </div>
-
-    <!-- theme -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>theme</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-1">
-        <div class="pure-g ">
-            {% for theme in stamp.primary_theme %}
-            <div class="pure-u-1-3 gap-1">
-                <div class="cell">
-                    <span class="number">{{ loop.index }}</span>
-                    {{ theme }}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <!-- country -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>country</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-2">
-        <div class="cell">
-            {{ stamp.country }}
-        </div>
-    </div>
-
-    <!-- date -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>date</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-1">
-        <div class="cell">
-            {{ stamp.date.strftime('%d %B %Y') }}
-        </div>
-    </div>
-
-    <!-- issuer -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>issuer</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-1">
-        <div class="cell">
-            {{ stamp.issuer }}
-        </div>
-    </div>
-
-    <!-- printer -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>printer</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-2">
-        <div class="cell">
-            {{ stamp.printer }}
-        </div>
-    </div>
-
-    <!-- size -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>size</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-1">
-        <div class="cell">
-            {{ stamp.size.width }} x {{ stamp.size.height }}
-        </div>
-    </div>
-
-    <!-- format / layout -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>format / layout</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-1">
-        <div class="cell">
-            {{ stamp.layout }}
-        </div>
-    </div>
-
-    <!-- perforations -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>perforations</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-2">
-        <div class="cell">
-            {{ stamp.perforations }}
-        </div>
-    </div>
-
-    <!-- denomination -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>denomination</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-2">
-        <div class="cell">
-            {{ stamp.denomination }}
-        </div>
-    </div>
-
-    <!-- wns number -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>wns number</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-1">
-        <div class="cell">
-            {{ stamp._id }}
-        </div>
-    </div>
-
-    <!-- api -->
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>api</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5 gap-2">
-        <div class="cell">
-            <a href="{{ url_for('api.stamp_route', wns=stamp._id) }}">
-                view
-            </a>
-        </div>
-    </div>
-
-    {% if stamp.set %}
-    <div class="pure-u-1-5">
-        <div class="cell">
-            <strong>in set with</strong>
-        </div>
-    </div>
-    <div class="pure-u-4-5">
-        <div class="pure-g ">
-            {% for other in stamp.set %}
-            <div class="pure-u-1-3 gap-1">
-                <div class="cell">
-                    <a href="{{ url_for('frontend.stamp', wns=other._id) }}">
-                        <img class="pure-img gap-1" src="{{ other.image['250'] }}">
-                    </a>
-                    <div>
-                        <span class="number">{{ loop.index }}</span>
-                        {{ other._id }}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-</div>
+/ text blocks
+-def info(header, tag=None, gap=1)
+  .pure-u-1-5
+    .cell
+      strong =header
+  .pure-u-4-5 class=('gap-' + str(gap))
+    .cell
+      =stamp.get(tag) or stamp[header]
 
 
-{% endblock %}
+-block content
+  .pure-g
+
+    / subject
+    .pure-u-1
+      .cell
+        h1 =stamp['subject']
+
+    / image
+    .pure-u-1-5
+      .cell
+        strong image
+    .pure-u-4-5.gap-2
+      .cell
+        img.stamp-img src=stamp['image']['full']
+
+
+    / theme
+    .pure-u-1-5
+      .cell
+        strong theme
+    .pure-u-4-5
+      .pure-g
+        -for theme in stamp['theme']
+          .pure-u-1-3.gap-1
+            .cell
+              span.number =,loop.index + 1
+              =theme
+
+    / country
+    =info('country', gap=2)
+
+    / date
+    .pure-u-1-5
+      .cell
+        strong date
+    .pure-u-4-5.gap-1
+      .cell
+        =stamp['date'].strftime('%d %B %Y')
+
+    / issuer
+    =info('issuer')
+
+    /printer
+    =info('printer', gap=2)
+
+    / size
+    .pure-u-1-5
+      .cell
+        strong size
+    .pure-u-4-5.gap-1
+      .cell
+        =,stamp['size']['width']
+        , ×
+        =stamp['size']['width']
+
+    / format
+    =info('format / layout', tag='layout')
+
+    / perforations
+    =info('perforations', gap=2)
+
+    / denomination
+    =info('denomination', gap=2)
+
+    / wns number
+    =info('wns number', tag='_id')
+
+    / api
+    .pure-u-1-5
+      .cell
+        strong api
+    .pure-u-4-5.gap-2
+      .cell
+        a href=url_for('api.stamp_route', wns=stamp['_id'])
+          | view
+
+    / set
+    .pure-u-1-5
+      .cell
+        strong in set with
+    .pure-u-4-5
+      .pure-g
+        -for other in stamp['set']
+          .pure-u-1-3.gap-1
+            .cell
+              a href=url_for('frontend.stamp', wns=other['_id'])
+                img.pure-img.gap-1 src=other['image']['250']
+              span.number
+                =loop.index + 1
+              =other['_id']
