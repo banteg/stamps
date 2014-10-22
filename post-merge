@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "updating dependencies"
+pip install -U -e .
+
 echo "compiling coffee"
 coffee -c stamps/static/
 
