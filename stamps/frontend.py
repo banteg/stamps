@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, abort
+from flask.ext.mako import render_template
 from pymongo import MongoClient
 
 from stamps import api
