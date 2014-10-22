@@ -18,7 +18,7 @@ def bsonify(data):
                     mimetype='application/json')
 
 
-def stamp(wns):
+def stamp(wns, extended=True):
     if not wns_re.match(wns):
         return None
 
@@ -26,6 +26,13 @@ def stamp(wns):
         data = next(db.stamps.find({'_id': wns}))
     except StopIteration:
         return None
+
+    if extended and 'set' in data:
+        other = db.stamps.find(
+            {'_id': {'$in': data['set']}},
+            {'_id': 1, 'image': 1}
+        )
+        data['set'] = list(other)
 
     return data
 
