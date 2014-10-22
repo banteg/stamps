@@ -1,24 +1,40 @@
 {% extends "base.html" %}
 
 {% block body %}
-<h1>{{ stamp.subject }}</h1>
 
 <div class="pure-g gap-2">
-    <div class="pure-u-1-5"><strong>image</strong></div>
+    <div class="pure-u-1">
+        <div class="cell">
+            <h1>{{ stamp.subject }}</h1>
+        </div>
+    </div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>image</strong>
+        </div>
+    </div>
     <div class="pure-u-4-5">
-        <img class="pure-img" src="{{ stamp.image.full }}">
+        <div class="cell">
+            <img class="stamp-img" src="{{ stamp.image.full }}">
+        </div>
     </div>
 </div>
 
 
 <div class="pure-g gap-1">
-    <div class="pure-u-1-5"><strong>theme</strong></div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>theme</strong>
+        </div>
+    </div>
     <div class="pure-u-4-5">
         <div class="pure-g ">
             {% for theme in stamp.primary_theme %}
             <div class="pure-u-1-3 gap-1">
-                <span class="number">{{ loop.index }}</span>
-                {{ theme }}
+                <div class="cell">
+                    <span class="number">{{ loop.index }}</span>
+                    {{ theme }}
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -27,64 +43,161 @@
 
 
 <div class="pure-g gap-1">
-    <div class="pure-u-1-5"><strong>country</strong></div>
-    <div class="pure-u-4-5">{{ stamp.country }}</div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>country</strong>
+        </div>
+    </div>
+    <div class="pure-u-4-5">
+        <div class="cell">
+            {{ stamp.country }}
+        </div>
+    </div>
 </div>
 
 <div class="pure-g gap-2">
-    <div class="pure-u-1-5"><strong>date</strong></div>
-    <div class="pure-u-4-5">{{ stamp.date.strftime('%d %B %Y') }}</div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>date</strong>
+        </div>
+    </div>
+    <div class="pure-u-4-5">
+        <div class="cell">
+            {{ stamp.date.strftime('%d %B %Y') }}
+        </div>
+    </div>
 </div>
 
 <div class="pure-g gap-1">
-    <div class="pure-u-1-5"><strong>issuer</strong></div>
-    <div class="pure-u-4-5">{{ stamp.issuer }}</div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>issuer</strong>
+        </div>
+    </div>
+    <div class="pure-u-4-5">
+        <div class="cell">
+            {{ stamp.issuer }}
+        </div>
+    </div>
 </div>
 <div class="pure-g gap-2">
-    <div class="pure-u-1-5"><strong>printer</strong></div>
-    <div class="pure-u-4-5">{{ stamp.printer }}</div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>printer</strong>
+        </div>
+    </div>
+    <div class="pure-u-4-5">
+        <div class="cell">
+            {{ stamp.printer }}
+        </div>
+    </div>
 </div>
 
 <div class="pure-g gap-1">
-    <div class="pure-u-1-5"><strong>size</strong></div>
-    <div class="pure-u-4-5">{{ stamp.size.width }} x {{ stamp.size.height }}</div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>size</strong>
+        </div>
+    </div>
+    <div class="pure-u-4-5">
+        <div class="cell">
+            {{ stamp.size.width }} x {{ stamp.size.height }}
+        </div>
+    </div>
 </div>
 <div class="pure-g gap-1">
-    <div class="pure-u-1-5"><strong>format / layout</strong></div>
-    <div class="pure-u-4-5">{{ stamp.layout }}</div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>format / layout</strong>
+        </div>
+    </div>
+    <div class="pure-u-4-5">
+        <div class="cell">
+            {{ stamp.layout }}
+        </div>
+    </div>
 </div>
 <div class="pure-g gap-2">
-    <div class="pure-u-1-5"><strong>perforations</strong></div>
-    <div class="pure-u-4-5">{{ stamp.perforations }}</div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>perforations</strong>
+        </div>
+    </div>
+    <div class="pure-u-4-5">
+        <div class="cell">
+            {{ stamp.perforations }}
+        </div>
+    </div>
 </div>
 
 <div class="pure-g gap-2">
-    <div class="pure-u-1-5"><strong>denomination</strong></div>
-    <div class="pure-u-4-5">{{ stamp.denomination }}</div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>denomination</strong>
+        </div>
+    </div>
+    <div class="pure-u-4-5">
+        <div class="cell">
+            {{ stamp.denomination }}
+        </div>
+    </div>
 </div>
 
 
 <div class="pure-g gap-2">
-    <div class="pure-u-1-5"><strong>wns number</strong></div>
-    <div class="pure-u-4-5">{{ stamp._id }}</div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>wns number</strong>
+        </div>
+    </div>
+    <div class="pure-u-4-5">
+        <div class="cell">
+            {{ stamp._id }}
+        </div>
+    </div>
+</div>
+
+<div class="pure-g gap-2">
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>api</strong>
+        </div>
+    </div>
+    <div class="pure-u-4-5">
+        <div class="cell">
+            <a href="{{ url_for('api.stamp_route', wns=stamp._id) }}">
+                view
+            </a>
+        </div>
+    </div>
 </div>
 
 {% if stamp.set %}
 <div class="pure-g gap-2">
-    <div class="pure-u-1-5"><strong>in set with</strong></div>
+    <div class="pure-u-1-5">
+        <div class="cell">
+            <strong>in set with</strong>
+        </div>
+    </div>
     <div class="pure-u-4-5">
         <div class="pure-g ">
             {% for other in stamp.set %}
             <div class="pure-u-1-3 gap-1">
-                <span class="number">{{ loop.index }}</span>
-                <a href="{{ url_for('frontend.stamp', wns=other) }}">
-                {{ other }}
-                </a>
+                <div class="cell">
+                    <a href="{{ url_for('frontend.stamp', wns=other._id) }}">
+                        <img class="pure-img gap-1" src="{{ other.image['250'] }}">
+                    </a>
+                    <div>
+                        <span class="number">{{ loop.index }}</span>
+                        {{ other._id }}
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </div>
 {% endif %}
+
 
 {% endblock %}
