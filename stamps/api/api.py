@@ -1,25 +1,14 @@
 import re
 from datetime import datetime
 
-from flask import Blueprint, Response, abort, request, jsonify
 from pymongo import MongoClient
-from bson.json_util import dumps
-
-
-api = Blueprint('api', __name__)
-wns_re = re.compile('([A-Z]{2})(\d{3})\.(\d{2})')
 
 mongo = MongoClient()
 db = mongo.stamps
 
 
-def bsonify(data):
-    return Response(dumps(data, indent=2, ensure_ascii=False),
-                    mimetype='application/json')
-
-
 def stamp(wns, extended=True):
-    if not wns_re.match(wns):
+    if not re.match('([A-Z]{2})(\d{3})\.(\d{2})', wns):
         return None
 
     try:
@@ -87,34 +76,3 @@ def search(query):
     }
 
     return data
-
-
-@api.route('/stamp/<wns>')
-def stamp_route(wns):
-    data = stamp(wns)
-
-    if not data:
-        abort(404)
-    return jsonify(data)
-
-
-@api.route('/themes')
-def themes_route():
-    data = themes()
-    return jsonify(data)
-
-
-@api.route('/countries')
-def countries_route():
-    data = countries()
-    return jsonify(data)
-
-
-@api.route('/search', methods=['POST'])
-def search_route():
-    query = request.get_json()
-    if not query:
-        query = {}
-
-    data = search(query)
-    return jsonify(data)

@@ -2,7 +2,7 @@ from flask import Flask
 from flask.ext.mako import MakoTemplates
 from plim import preprocessor
 
-from stamps.api import api
+from stamps.api.views import api_bp
 from stamps.frontend import frontend
 
 
@@ -14,7 +14,7 @@ app.config.update(
     MAKO_TRANSLATE_EXCEPTIONS=False
 )
 
-app.register_blueprint(api, url_prefix='/api')
+app.register_blueprint(api_bp, url_prefix='/api')
 app.register_blueprint(frontend)
 
 

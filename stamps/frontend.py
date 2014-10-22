@@ -2,7 +2,7 @@ from flask import Blueprint, abort
 from flask.ext.mako import render_template
 from pymongo import MongoClient
 
-from stamps import api
+from stamps.api import api
 
 
 frontend = Blueprint('frontend', __name__)

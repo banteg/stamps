@@ -1,0 +1,54 @@
+from flask import Blueprint, abort, request, jsonify
+
+from stamps.api import api, stats
+
+api_bp = Blueprint('api', __name__)
+
+
+@api_bp.route('/stamp/<wns>')
+def stamp(wns):
+    data = api.stamp(wns)
+
+    if not data:
+        abort(404)
+    return jsonify(data)
+
+
+@api_bp.route('/themes')
+def themes():
+    data = api.themes()
+    return jsonify(data)
+
+
+@api_bp.route('/countries')
+def countries():
+    data = api.countries()
+    return jsonify(data)
+
+
+@api_bp.route('/search', methods=['POST'])
+def search():
+    query = request.get_json()
+    if not query:
+        query = {}
+
+    data = api.search(query)
+    return jsonify(data)
+
+
+@api_bp.route('/stats/theme')
+def stats_theme():
+    data = stats.theme()
+    return jsonify(data)
+
+
+@api_bp.route('/stats/country')
+def stats_country():
+    data = stats.country()
+    return jsonify(data)
+
+
+@api_bp.route('/stats/year')
+def stats_year():
+    data = stats.year()
+    return jsonify(data)
