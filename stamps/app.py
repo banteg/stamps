@@ -10,7 +10,8 @@ app = Flask(__name__)
 mako = MakoTemplates(app)
 app.config.update(
     JSON_AS_ASCII=False,
-    MAKO_PREPROCESSOR=preprocessor
+    MAKO_PREPROCESSOR=preprocessor,
+    MAKO_TRANSLATE_EXCEPTIONS=False
 )
 
 app.register_blueprint(api, url_prefix='/api')
