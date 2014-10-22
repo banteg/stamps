@@ -35,7 +35,7 @@
           .pure-u-1-3.gap-2 ng-repeat='stamp in stamps'
             .cell
               a href='/stamp/{{ stamp._id }}'
-                img.pure-img.gap-1 ng-src='{{ stamp.image['250'] }}'
+                img.pure-img.gap-1 ng-src="{{ stamp.image['250'] }}"
                   .gap-1
                     {{ stamp.subject }}
               .secondary
