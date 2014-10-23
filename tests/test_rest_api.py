@@ -85,6 +85,7 @@ def test_api_search_get_fail(client):
 
 
 @pytest.mark.parametrize('query', [
+    {},
     {'country': 'Canada'},
     {'theme': 'Flora'},
     {'country': 'Switzerland', 'theme': 'Fauna'},
@@ -101,4 +102,3 @@ def test_api_search_1(client, query):
     assert c.status_code == 200
     assert c.headers['content-type'] == 'application/json'
     assert 'data' in j
-    assert j['count'] < 70000
