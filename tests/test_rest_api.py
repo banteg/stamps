@@ -8,7 +8,7 @@ def json(c):
 
 
 def test_api_stamp_url(context):
-    wns = 'CH032.02'
+    wns = 'PE080.04'
     with context:
         stamp = url_for('api.stamp', wns=wns)
     assert stamp == '/api/stamp/{}'.format(wns)
@@ -37,7 +37,7 @@ def test_stats_urls(context, a, b):
 
 
 @pytest.mark.parametrize('wns,status_code', [
-    ('CH032.02', 200),
+    ('PE080.04', 200),
     ('R2D2', 404),
     ('whatever', 404)
 ])

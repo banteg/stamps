@@ -10,8 +10,8 @@ def test_urls(context):
 
 def test_stamp_url(client, context):
     with context:
-        t = url_for('frontend.stamp', wns='CH032.02')
-    assert t == '/stamp/CH032.02'
+        t = url_for('frontend.stamp', wns='PE080.04')
+    assert t == '/stamp/PE080.04'
 
 
 def test_index(client):
@@ -25,7 +25,7 @@ def test_explore(client, context):
 
 
 @pytest.mark.parametrize('wns,status_code', [
-    ('CH032.02', 200),
+    ('PE080.04', 200),
     ('XX000.00', 404),
     ('R2D2', 404),
 ])

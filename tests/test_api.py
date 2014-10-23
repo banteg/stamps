@@ -18,7 +18,7 @@ def test_search(query):
 
 
 @pytest.mark.parametrize('wns,result', [
-    ('CH032.02', True),
+    ('PE080.04', True),
     ('XX000.00', None),
     ('R2D2', None),
 ])
