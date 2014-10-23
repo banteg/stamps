@@ -1,0 +1,13 @@
+language: python
+python:
+  - "3.4"
+services:
+  - mongodb
+install:
+  - "pip install -e .[test]"
+before_script:
+  - mongorestore db
+script:
+  - coverage run --source=stamps -m py.test
+after_success:
+  - coveralls

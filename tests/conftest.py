@@ -25,5 +25,5 @@ def context(app):
 
 
 def pytest_configure():
-    print('conf')
+    print('preparing environment')
     app()

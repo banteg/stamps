@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='stamps',
-    version='0.1.3-dev',
+    version='0.1.4-dev',
     url='https://github.com/banteg/stamps',
 
     packages=['stamps'],
@@ -13,6 +13,14 @@ setup(
         'flask-mako',
         'plim',
     ],
+
+    extras_require={
+        'test': [
+            'pytest',
+            'coverage',
+            'coveralls',
+        ],
+    },
 
     entry_points={
         'console_scripts': [
