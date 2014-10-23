@@ -29,9 +29,5 @@ def develop():
     app.run('127.0.0.1', 8000)
 
 
-def wsgi():
-    app = create_app('production')
-    return app
-
 if __name__ == '__main__':
     develop()
