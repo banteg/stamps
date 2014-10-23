@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='stamps',
-    version='0.1.1-dev',
+    version='0.1.2-dev',
     url='https://github.com/banteg/stamps',
 
     packages=['stamps'],
@@ -16,7 +16,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'stamps = stamps.app:main',
+            'stamps = stamps.app:develop',
         ]
     }
 )
