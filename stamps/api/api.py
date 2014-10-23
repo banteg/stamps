@@ -1,10 +1,9 @@
 import re
 from datetime import datetime
 
-from pymongo import MongoClient
+from stamps.db import db
 
-mongo = MongoClient()
-db = mongo.stamps
+db = db()
 
 
 def stamp(wns, extended=True):

@@ -3,8 +3,7 @@ import os
 from flask import Flask
 from flask.ext.mako import MakoTemplates
 
-from stamps.api.views import api_bp
-from stamps.frontend import frontend
+from stamps.db import mongo
 
 
 def create_app(config):
@@ -13,7 +12,13 @@ def create_app(config):
     config_filename = os.path.join('config', '{}.py'.format(config))
     app.config.from_pyfile(config_filename)
 
+    mongo.init_app(app)
+    mongo.app = app
+
+    from stamps.api.views import api_bp
     app.register_blueprint(api_bp, url_prefix='/api')
+
+    from stamps.frontend import frontend
     app.register_blueprint(frontend)
 
     return app

@@ -1,14 +1,9 @@
 from flask import Blueprint, abort
 from flask.ext.mako import render_template
-from pymongo import MongoClient
 
 from stamps.api import api, stats
 
-
 frontend = Blueprint('frontend', __name__)
-
-mongo = MongoClient()
-db = mongo.stamps
 
 
 @frontend.route('/')

@@ -1,7 +1,6 @@
-from pymongo import MongoClient
+from stamps.db import db
 
-mongo = MongoClient()
-db = mongo.stamps
+db = db()
 
 
 def theme():
