@@ -11,8 +11,6 @@ from stamps.api import api, stats
     {'country': 'Canada', 'theme': 'Architecture'},
     {'year': 2007, 'limit': 1},
     {'year': 2002, 'skip': 6},
-    {'subject': '"pet fish"'},
-    {'subject': 'flower -beautiful'},
 ])
 def test_search(query):
     t = api.search(query)
@@ -22,12 +20,12 @@ def test_search(query):
     assert t['count'] > 0
 
 
+@pytest.mark.skipif('TRAVIS' in os.environ,
+                    reason='Travis: text search not enabled')
 @pytest.mark.parametrize('query', [
     {'subject': '"pet fish"'},
     {'subject': 'flower -beautiful'},
 ])
-@pytest.mark.skipif('TRAVIS' in os.environ,
-                    reason='Travis: text search not enabled')
 def test_text_search(query):
     t = api.search(query)
 
