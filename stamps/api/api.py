@@ -54,6 +54,14 @@ def year_filter(query):
     return query
 
 
+def subject_filter(query):
+    subject = query.pop('subject')
+    query['$text'] = {
+        '$search': subject,
+    }
+    return query
+
+
 def search(query):
     skip = int(query.get('skip', 0))
     limit = int(query.get('limit', 10))
@@ -63,6 +71,8 @@ def search(query):
     query = {k: v for k, v in query.items() if v}
     if 'year' in query:
         query = year_filter(query)
+    if 'subject' in query:
+        query = subject_filter(query)
 
     results = db.stamps.find(query).skip(skip).limit(limit)
     count = results.count()
@@ -72,6 +82,7 @@ def search(query):
         'skip': skip,
         'limit': limit,
         'data': list(results),
+        'query': query,
     }
 
     return data
