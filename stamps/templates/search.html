@@ -1,5 +1,10 @@
 -inherit base.html
 
+-def select(one, many)
+  label =one
+  select.pure-input-1 ng-model='filters.${one}' ng-change='reset_search()' ng-options='${one} for ${one} in ${many}'
+
+
 -block content
   div ng-controller='SearchCtrl'
     .pure.g
@@ -10,7 +15,8 @@
           h1 explore
       .pure-u-4-5
         .cell
-          h1 ng-show='busy' searching…
+          h1 ng-show='busy'
+            | searching…
           h1 ng-hide='busy'
             | found {{ results.count }} stamps
 
@@ -20,14 +26,9 @@
           fieldset
             .pure-u-1
               .cell
-                label country
-                select.pure-input-1 ng-model='filters.country' ng-change='reset_search()' ng-options='country for country in countries'
-
-                label theme
-                select.pure-input-1 ng-model='filters.theme' ng-change='reset_search()' ng-options='theme for theme in themes'
-
-                label year
-                select.pure-input-1 ng-model='filters.year' ng-change='reset_search()' ng-options='year for year in years'
+                =select('country', 'countries')
+                =select('theme', 'themes')
+                =select('year', 'years')
 
       / results
       .pure-u-4-5
