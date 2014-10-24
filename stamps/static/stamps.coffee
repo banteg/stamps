@@ -2,6 +2,7 @@ app = angular.module 'stamps', []
 
 app.controller 'SearchCtrl', ($scope, $http) ->
     $scope.debug = false
+    $scope.first = true
     $scope.results = {
         count: 0
     }
@@ -26,24 +27,34 @@ app.controller 'SearchCtrl', ($scope, $http) ->
         $scope.themes = data.themes
         console.log(data)
 
-    search = (new_val, old_val, scope) ->
+    search = () ->
+        console.log('search', $scope.filters)
         $scope.busy = true
         $http.post('/api/search', $scope.filters).success (data) ->
             $scope.results = data
             for stamp in data.data
                 $scope.stamps.push stamp
             $scope.busy = false
+            if $scope.first
+                console.log('first')
+                $scope.first = false
+                $scope.stamps = []
+                $scope.filters.skip = Math.floor(Math.random() * data.count)
+                search()
 
     $scope.next_page = () ->
+        console.log('next page')
         if not $scope.busy and $scope.filters.skip < $scope.results.count - $scope.filters.limit
             $scope.filters.skip += $scope.filters.limit
             search()
 
     $scope.reset_search = () ->
+        console.log('reset search')
         $scope.filters.skip = 0
         $scope.stamps = []
+        search()
 
-    $scope.$watchCollection('filters', search)
+    search()
 
 
 app.directive 'whenScrolled', ($window) ->
