@@ -2,10 +2,10 @@
 
 / text blocks
 -def info(header, tag=None, gap=1)
-  .pure-u-1-5
+  .pure-u-1.pure-u-md-1-5
     .cell
       strong =header
-  .pure-u-4-5 class=('gap-' + str(gap))
+  .pure-u-1.pure-u-md-4-5 class=('gap-' + str(gap))
     .cell
       =stamp.get(tag) or stamp[header]
 
@@ -19,22 +19,22 @@
         h1 =stamp['subject']
 
     / image
-    .pure-u-1-5
+    .pure-u-1.pure-u-md-1-5
       .cell
         strong image
-    .pure-u-4-5.gap-2
+    .pure-u-1.pure-u-md-4-5.gap-2
       .cell
         img.stamp-img src=stamp['image']['full']
 
 
     / theme
-    .pure-u-1-5
+    .pure-u-1.pure-u-md-1-5
       .cell
         strong theme
-    .pure-u-4-5
+    .pure-u-1.pure-u-md-4-5
       .pure-g
         -for theme in stamp['theme']
-          .pure-u-1-3.gap-1
+          .pure-u-1-2.pure-u-md-1-3.gap-1
             .cell
               span.number =,loop.index + 1
               =theme
@@ -43,10 +43,10 @@
     =info('country', gap=2)
 
     / date
-    .pure-u-1-5
+    .pure-u-1.pure-u-md-1-5
       .cell
         strong date
-    .pure-u-4-5.gap-1
+    .pure-u-1.pure-u-md-4-5.gap-1
       .cell
         =stamp['date'].strftime('%d %B %Y')
 
@@ -57,10 +57,10 @@
     =info('printer', gap=2)
 
     / size
-    .pure-u-1-5
+    .pure-u-1.pure-u-md-1-5
       .cell
         strong size
-    .pure-u-4-5.gap-1
+    .pure-u-1.pure-u-md-4-5.gap-1
       .cell
         =,stamp['size']['width']
         , ×
@@ -79,22 +79,22 @@
     =info('wns number', tag='_id')
 
     / api
-    .pure-u-1-5
+    .pure-u-1.pure-u-md-1-5
       .cell
         strong api
-    .pure-u-4-5.gap-2
+    .pure-u-1.pure-u-md-4-5.gap-2
       .cell
         a href=url_for('api.stamp', wns=stamp['_id'])
           | view
 
     / set
-    .pure-u-1-5
+    .pure-u-1.pure-u-md-1-5
       .cell
         strong in set with
-    .pure-u-4-5
+    .pure-u-1.pure-u-md-4-5
       .pure-g
         -for other in stamp['set']
-          .pure-u-1-3.gap-1
+          .pure-u-1-2.pure-u-md-1-3.gap-1
             .cell
               a href=url_for('frontend.stamp', wns=other['_id'])
                 img.pure-img.gap-1 src=other['image']['250']
