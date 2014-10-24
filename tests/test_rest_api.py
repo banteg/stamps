@@ -85,12 +85,13 @@ def test_api_search_get_fail(client):
 
 
 @pytest.mark.parametrize('query', [
-    {},
-    {'country': 'Canada'},
-    {'theme': 'Flora'},
-    {'country': 'Switzerland', 'theme': 'Fauna'},
+    {'country': 'Switzerland'},
+    {'theme': 'Famous people'},
+    {'country': 'Canada', 'theme': 'Architecture'},
     {'year': 2007, 'limit': 1},
-    {'year': 2002, 'country': 'Zimbabwe'},
+    {'year': 2002, 'skip': 6},
+    {'subject': '"pet fish"'},
+    {'subject': 'flower -beautiful'},
 ])
 def test_api_search_1(client, query):
     print(query)
@@ -102,3 +103,4 @@ def test_api_search_1(client, query):
     assert c.status_code == 200
     assert c.headers['content-type'] == 'application/json'
     assert 'data' in j
+    assert j['count'] > 0

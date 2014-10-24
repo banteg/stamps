@@ -4,17 +4,20 @@ from stamps.api import api, stats
 
 
 @pytest.mark.parametrize('query', [
-    {'country': 'Canada'},
-    {'theme': 'Flora'},
-    {'country': 'Switzerland', 'theme': 'Fauna'},
+    {'country': 'Switzerland'},
+    {'theme': 'Famous people'},
+    {'country': 'Canada', 'theme': 'Architecture'},
     {'year': 2007, 'limit': 1},
-    {'year': 2002, 'country': 'Zimbabwe'},
+    {'year': 2002, 'skip': 6},
+    {'subject': '"pet fish"'},
+    {'subject': 'flower -beautiful'},
 ])
 def test_search(query):
     t = api.search(query)
 
     assert 'data' in t
     assert t['count'] < 70000
+    assert t['count'] > 0
 
 
 @pytest.mark.parametrize('wns,result', [
