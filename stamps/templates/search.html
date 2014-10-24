@@ -10,21 +10,21 @@
     .pure.g
 
       / header
-      .pure-u-1-5
+      .pure-u-1.pure-u-md-1-5
         .cell
           h1 explore
-      .pure-u-4-5
+      .pure-u-1.pure-u-md-4-5
         .cell
           h1 ng-show='busy'
             | searching…
           h1 ng-hide='busy'
-            | found {{ results.count }} stamps
+            | {{ results.count }} stamps
 
       / filters
-      .pure-u-1-5
+      .pure-u-1.pure-u-md-1-5
         form class='pure-form pure-form-stacked'
           fieldset
-            .pure-u-1.gap-2
+            .pure-u-1.pure-u-md-1.gap-2
               .cell
                 / subject
                 label subject
@@ -43,9 +43,9 @@
                 pre.number {{ results.query | json }}
 
       / results
-      .pure-u-4-5
+      .pure-u-1.pure-u-md-4-5
         .pure-g when-scrolled='next_page()'
-          .pure-u-1-3.gap-2 ng-repeat='stamp in stamps'
+          .pure-u-1-2.pure-u-md-1-3.gap-2 ng-repeat='stamp in stamps'
             .cell
               stamp stamp='stamp'
           .pure-u-1 ng-show='busy && filters.skip > 0'
