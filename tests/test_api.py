@@ -22,7 +22,7 @@ def test_search(query):
     assert t['count'] > 0
 
 
-@pytest.mark.skipif('travis' in os.environ,
+@pytest.mark.skipif('TRAVIS' in os.environ,
                     reason='Travis: text search not enabled')
 @pytest.mark.parametrize('query', [
     {'subject': '"pet fish"'},
