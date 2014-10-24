@@ -1,6 +1,7 @@
 app = angular.module 'stamps', []
 
 app.controller 'SearchCtrl', ($scope, $http) ->
+    $scope.debug = false
     $scope.results = {
         count: 0
     }

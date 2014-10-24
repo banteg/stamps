@@ -24,11 +24,23 @@
       .pure-u-1-5
         form class='pure-form pure-form-stacked'
           fieldset
-            .pure-u-1
+            .pure-u-1.gap-2
               .cell
+                / subject
+                label subject
+                .number also try "exact" and -exclude
+
+                input.pure-input-1 ng-model='filters.subject' ng-change='reset_search()'
+
                 =select('country', 'countries')
                 =select('theme', 'themes')
                 =select('year', 'years')
+
+            / debug search
+            .pure-u-1 ng-show="debug"
+              .cell
+                h1 raw
+                pre.number {{ results.query | json }}
 
       / results
       .pure-u-4-5
