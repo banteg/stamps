@@ -6,7 +6,7 @@ services:
 install:
   - "pip install -e .[test]"
 before_script:
-  - mongorestore db
+  - mongorestore tests/db
 script:
   - coverage run --source=stamps -m py.test
 after_success:
