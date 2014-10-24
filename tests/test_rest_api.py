@@ -1,6 +1,8 @@
-from flask import url_for
+import os
 from json import loads, dumps
+
 import pytest
+from flask import url_for
 
 
 def json(c):
@@ -90,10 +92,27 @@ def test_api_search_get_fail(client):
     {'country': 'Canada', 'theme': 'Architecture'},
     {'year': 2007, 'limit': 1},
     {'year': 2002, 'skip': 6},
+])
+def test_api_search(client, query):
+    print(query)
+    c = client.post('/api/search',
+                    data=dumps(query),
+                    content_type='application/json')
+    j = json(c)
+
+    assert c.status_code == 200
+    assert c.headers['content-type'] == 'application/json'
+    assert 'data' in j
+    assert j['count'] > 0
+
+
+@pytest.mark.skipif('travis' in os.environ,
+                    reason='Travis: text search not enabled')
+@pytest.mark.parametrize('query', [
     {'subject': '"pet fish"'},
     {'subject': 'flower -beautiful'},
 ])
-def test_api_search_1(client, query):
+def test_api_text_search(client, query):
     print(query)
     c = client.post('/api/search',
                     data=dumps(query),

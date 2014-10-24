@@ -1,3 +1,5 @@
+import os
+
 import pytest
 
 from stamps.api import api, stats
@@ -13,6 +15,20 @@ from stamps.api import api, stats
     {'subject': 'flower -beautiful'},
 ])
 def test_search(query):
+    t = api.search(query)
+
+    assert 'data' in t
+    assert t['count'] < 70000
+    assert t['count'] > 0
+
+
+@pytest.mark.skipif('travis' in os.environ,
+                    reason='Travis: text search not enabled')
+@pytest.mark.parametrize('query', [
+    {'subject': '"pet fish"'},
+    {'subject': 'flower -beautiful'},
+])
+def test_text_search(query):
     t = api.search(query)
 
     assert 'data' in t
