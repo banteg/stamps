@@ -27,11 +27,13 @@ app.controller 'SearchCtrl', ($scope, $http) ->
         $scope.themes = data.themes
         console.log(data)
 
-    search = () ->
+    search = (clean) ->
         console.log('search', $scope.filters)
         $scope.busy = true
         $http.post('/api/search', $scope.filters).success (data) ->
             $scope.results = data
+            if clean
+                $scope.stamps = []
             for stamp in data.data
                 $scope.stamps.push stamp
             $scope.busy = false
@@ -40,21 +42,20 @@ app.controller 'SearchCtrl', ($scope, $http) ->
                 $scope.first = false
                 $scope.stamps = []
                 $scope.filters.skip = Math.floor(Math.random() * data.count)
-                search()
+                search(true)
 
     $scope.next_page = () ->
         console.log('next page')
         if not $scope.busy and $scope.filters.skip < $scope.results.count - $scope.filters.limit
             $scope.filters.skip += $scope.filters.limit
-            search()
+            search(false)
 
     $scope.reset_search = () ->
         console.log('reset search')
         $scope.filters.skip = 0
-        $scope.stamps = []
-        search()
+        search(true)
 
-    search()
+    search(false)
 
 
 app.directive 'whenScrolled', ($window) ->
