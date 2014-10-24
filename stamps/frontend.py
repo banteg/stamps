@@ -29,3 +29,8 @@ def stamp(wns):
         abort(404)
 
     return render_template('stamp.html', stamp=stamp)
+
+
+@frontend.route('/templates/ministamp.html')
+def ministamp():
+    return render_template('ministamp.html')

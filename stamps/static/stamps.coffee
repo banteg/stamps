@@ -52,3 +52,10 @@ app.directive 'whenScrolled', ($window) ->
         win.bind 'scroll', () ->
             if body.scrollHeight == body.scrollTop + window.innerHeight
                 scope.next_page()
+
+
+app.directive 'stamp', () ->
+    restrict: 'E',
+    templateUrl: '/templates/ministamp.html',
+    scope:
+        stamp: '=',
