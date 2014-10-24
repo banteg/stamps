@@ -106,12 +106,12 @@ def test_api_search(client, query):
     assert j['count'] > 0
 
 
-@pytest.mark.skipif('TRAVIS' in os.environ,
-                    reason='Travis: text search not enabled')
 @pytest.mark.parametrize('query', [
     {'subject': '"pet fish"'},
     {'subject': 'flower -beautiful'},
 ])
+@pytest.mark.skipif('TRAVIS' in os.environ,
+                    reason='Travis: text search not enabled')
 def test_api_text_search(client, query):
     print(query)
     c = client.post('/api/search',
