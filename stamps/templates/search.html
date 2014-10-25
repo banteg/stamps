@@ -13,12 +13,10 @@
       .pure-u-1.pure-u-md-1-5
         .cell
           h1 explore
+            img.loading src='/static/img/loading.svg' ng-show='busy'
       .pure-u-1.pure-u-md-4-5
         .cell
-          h1 ng-show='busy'
-            | searching…
-          h1 ng-hide='busy'
-            | {{ results.count }} stamps
+          h1 {{ results.count }} stamps
 
       / filters
       .pure-u-1.pure-u-md-1-5
