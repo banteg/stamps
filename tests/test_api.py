@@ -11,6 +11,7 @@ from stamps.api import api, stats
     {'country': 'Canada', 'theme': 'Architecture'},
     {'year': 2007, 'limit': 1},
     {'year': 2002, 'skip': 6},
+    {},
 ])
 def test_search(query):
     t = api.search(query)
@@ -39,12 +40,13 @@ def test_text_search(query):
     ('XX000.00', None),
     ('R2D2', None),
 ])
-def test_stamp(wns, result):
-    t = api.stamp(wns)
-    if not result:
-        assert t == result
-    else:
+@pytest.mark.parametrize('extended', [True, False])
+def test_stamp(wns, result, extended):
+    t = api.stamp(wns, extended=extended)
+    if result:
         assert 'subject' in t
+        if extended:
+            assert 'set' in t
 
 
 def test_themes():

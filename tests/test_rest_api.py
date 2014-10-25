@@ -92,6 +92,7 @@ def test_api_search_get_fail(client):
     {'country': 'Canada', 'theme': 'Architecture'},
     {'year': 2007, 'limit': 1},
     {'year': 2002, 'skip': 6},
+    {},
 ])
 def test_api_search(client, query):
     print(query)
