@@ -91,16 +91,17 @@
           | view
 
     / set
-    .pure-u-1.pure-u-md-1-5
-      .cell
-        strong in set with
-    .pure-u-1.pure-u-md-4-5
-      .pure-g
-        -for other in stamp['set']
-          .pure-u-1-2.pure-u-md-1-3.gap-1
-            .cell
-              a href=url_for('frontend.stamp', wns=other['_id'])
-                img.pure-img.gap-1 src=other['image']['250']
-              span.number
-                =,loop.index + 1
-              =other['_id']
+    -if stamp['set']
+      .pure-u-1.pure-u-md-1-5
+        .cell
+          strong in set with
+      .pure-u-1.pure-u-md-4-5
+        .pure-g
+          -for other in stamp['set']
+            .pure-u-1-2.pure-u-md-1-3.gap-1
+              .cell
+                a href=url_for('frontend.stamp', wns=other['_id'])
+                  img.pure-img.gap-1 src=other['image']['250']
+                span.number
+                  =,loop.index + 1
+                =other['_id']
