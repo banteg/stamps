@@ -12,14 +12,14 @@ def index():
     themes = stats.theme()
     themes = [t for t in themes if t['_id']]
 
-    return render_template('index.html',
+    return render_template('index.slim',
                            countries=countries,
                            themes=themes)
 
 
 @frontend.route('/explore')
 def search():
-    return render_template('search.html')
+    return render_template('search.slim')
 
 
 @frontend.route('/stamp/<wns>')
@@ -28,9 +28,9 @@ def stamp(wns):
     if not stamp:
         abort(404)
 
-    return render_template('stamp.html', stamp=stamp)
+    return render_template('stamp.slim', stamp=stamp)
 
 
-@frontend.route('/templates/ministamp.html')
+@frontend.route('/templates/ministamp.slim')
 def ministamp():
-    return render_template('ministamp.html')
+    return render_template('ministamp.slim')

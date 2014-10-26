@@ -70,6 +70,6 @@ app.directive 'whenScrolled', ($window) ->
 
 app.directive 'stamp', () ->
     restrict: 'E',
-    templateUrl: '/templates/ministamp.html',
+    templateUrl: '/templates/ministamp.slim',
     scope:
         stamp: '=',
