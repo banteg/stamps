@@ -63,7 +63,8 @@ app.directive 'whenScrolled', ($window) ->
         win = angular.element($window)
         body = document.body
         win.bind 'scroll', () ->
-            if body.scrollTop + window.innerHeight >= body.scrollHeight - 100
+            top = body.scrollTop or document.documentElement.scrollTop
+            if top + window.innerHeight >= body.scrollHeight - 100
                 scope.next_page()
 
 
