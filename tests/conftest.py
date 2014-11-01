@@ -10,8 +10,8 @@ def app():
 
 @pytest.fixture(scope='session')
 def db(app):
-    from stamps.db import db
-    return db()
+    from stamps.app import get_db
+    return get_db()
 
 
 @pytest.fixture(scope='session')

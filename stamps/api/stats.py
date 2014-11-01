@@ -1,6 +1,6 @@
-from stamps.db import db
+from stamps.app import get_db
 
-db = db()
+db = get_db()
 
 
 def theme():

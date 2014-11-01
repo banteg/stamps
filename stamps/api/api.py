@@ -1,9 +1,9 @@
 import re
 from datetime import datetime
 
-from stamps.db import db
+from stamps.app import get_db
 
-db = db()
+db = get_db()
 
 
 def stamp(wns, extended=True):
