@@ -8,6 +8,7 @@ install:
 before_script:
   - mongorestore tests/db
 script:
-  - coverage run --source=stamps -m py.test
+  - coverage run --source stamps -m py.test -rs
 after_success:
-  - coveralls
+  - codecov
+  - coverage report -m

@@ -18,7 +18,7 @@ setup(
         'test': [
             'pytest',
             'coverage',
-            'coveralls',
+            'codecov',
         ],
     },
 
