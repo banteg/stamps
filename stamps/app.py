@@ -11,8 +11,7 @@ mongo = PyMongo()
 
 def create_app(config):
     app = Flask(__name__)
-    config_filename = os.path.join('config', '{}.py'.format(config))
-    app.config.from_pyfile(config_filename)
+    app.config.from_object('stamps.config.{}'.format(config))
 
     mako.init_app(app)
 
