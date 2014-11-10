@@ -1,12 +1,12 @@
-import os
-
 from flask import Flask
 from flask.ext.mako import MakoTemplates
 from flask.ext.pymongo import PyMongo
+from flask_oauthlib.client import OAuth
 
 
 mako = MakoTemplates()
 mongo = PyMongo()
+oauth = OAuth()
 
 
 def create_app(config):
@@ -17,6 +17,11 @@ def create_app(config):
 
     mongo.init_app(app)
     mongo.app = app
+
+    oauth.init_app(app)
+
+    from stamps.auth.views import auth
+    app.register_blueprint(auth, url_prefix='/auth')
 
     from stamps.api.views import api_bp
     app.register_blueprint(api_bp, url_prefix='/api')
