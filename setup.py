@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='stamps',
-    version='0.1.5-dev',
+    version='0.1.6-dev',
     url='https://github.com/banteg/stamps',
 
     packages=['stamps'],
@@ -13,6 +13,7 @@ setup(
         'flask-mako',
         'plim',
         'flask-oauthlib',
+        'flask-login',
     ],
 
     extras_require={
