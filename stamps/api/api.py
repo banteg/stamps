@@ -7,7 +7,7 @@ db = get_db()
 
 
 def stamp(wns, extended=True):
-    if not re.match('([A-Z]{2})(\d{3})\.(\d{2})', wns):
+    if not re.match('[A-Z]{2}\d{3}\.\d{2}', wns):
         return None
 
     try:
