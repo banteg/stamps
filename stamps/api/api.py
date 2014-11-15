@@ -17,7 +17,7 @@ def stamp(wns, extended=True):
     if extended and 'set' in data:
         other = db.stamps.find(
             {'_id': {'$in': data['set']}},
-            {'_id': 1, 'image': 1}
+            {'image': 1}
         )
         data['set'] = list(other)
 

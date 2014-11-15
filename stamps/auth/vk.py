@@ -23,7 +23,7 @@ class VkUser(UserMixin):
 
     @staticmethod
     def load(user_id):
-        user = db.users.find_one(_id=user_id)
+        user = db.users.find_one(user_id)
         if user is None:
             return None
         return VkUser(user)
