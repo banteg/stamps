@@ -2,7 +2,7 @@ from flask import Blueprint, abort, request, jsonify
 
 from stamps.api import api, stats
 
-api_bp = Blueprint('api', __name__)
+api_bp = Blueprint('api', __name__, url_prefix='/api')
 
 
 @api_bp.route('/stamp/<wns>')

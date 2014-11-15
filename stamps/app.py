@@ -25,10 +25,10 @@ def create_app(config):
     login.init_app(app)
 
     from stamps.auth.views import auth
-    app.register_blueprint(auth, url_prefix='/auth')
+    app.register_blueprint(auth)
 
     from stamps.api.views import api_bp
-    app.register_blueprint(api_bp, url_prefix='/api')
+    app.register_blueprint(api_bp)
 
     from stamps.users.views import users
     app.register_blueprint(users)

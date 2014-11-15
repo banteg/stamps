@@ -5,7 +5,7 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 from stamps.auth.vk import vk, VkUser
 from stamps.app import login, get_db
 
-auth = Blueprint('auth', __name__)
+auth = Blueprint('auth', __name__, url_prefix='/auth')
 db = get_db()
 
 
