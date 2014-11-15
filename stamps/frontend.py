@@ -8,9 +8,8 @@ frontend = Blueprint('frontend', __name__)
 
 @frontend.route('/')
 def index():
-    countries = stats.country()
-    themes = stats.theme()
-    themes = [t for t in themes if t['_id']]
+    countries = stats.countries()
+    themes = stats.themes()
 
     return render_template('index.slim',
                            countries=countries,

@@ -1,37 +1,23 @@
+from operator import itemgetter
+
 from stamps.app import get_db
 
 db = get_db()
 
 
-def theme():
-    q = db.stamps.aggregate([
-        {'$unwind': '$theme'},
-        {'$group': {
-            '_id': '$theme',
-            'count': {'$sum': 1}
-        }},
-        {'$sort': {'count': -1}},
-    ])
-    return q['result']
+def themes():
+    q = db.stats.find_one({'_id': 'themes'})
+    s = sorted(q['themes'].items(), key=itemgetter(1), reverse=True)
+    return s
 
 
-def country():
-    q = db.stamps.aggregate([
-        {'$group': {
-            '_id': '$country',
-            'count': {'$sum': 1}
-        }},
-        {'$sort': {'count': -1}},
-    ])
-    return q['result']
+def countries():
+    q = db.stats.find_one({'_id': 'countries'})
+    s = sorted(q['countries'].items(), key=itemgetter(1), reverse=True)
+    return s
 
 
-def year():
-    q = db.stamps.aggregate([
-        {'$group': {
-            '_id': {'$year': '$date'},
-            'count': {'$sum': 1}
-        }},
-        {'$sort': {'count': -1}},
-    ])
-    return q['result']
+def years():
+    q = db.stats.find_one({'_id': 'years'})
+    s = sorted(q['years'].items(), key=itemgetter(1), reverse=True)
+    return s

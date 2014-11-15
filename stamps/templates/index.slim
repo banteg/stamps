@@ -18,11 +18,11 @@
         strong themes
     .pure-u-1.pure-u-md-4-5.gap-2
       .pure-g
-        -for theme in themes
+        -for theme, count in themes
           .pure-u-1-2.pure-u-md-1-3.gap-1
             .cell
-              =theme['_id']
-              .number =,theme['count']
+              =theme
+              .number =,count
                 | stamps
 
     / countries
@@ -31,9 +31,9 @@
         strong countries
     .pure-u-1.pure-u-md-4-5.gap-2
       .pure-g
-        -for country in countries
+        -for country, count in countries
           .pure-u-1-2.pure-u-md-1-3.gap-1
             .cell
-              =country['_id']
-              .number =,country['count']
+              =country
+              .number =,count
                 | stamps
