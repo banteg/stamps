@@ -60,7 +60,7 @@ def test_countries():
 
 
 @pytest.mark.parametrize('f', [
-    stats.country, stats.theme, stats.year
+    stats.countries, stats.themes, stats.years
 ])
 def test_api_stats(f):
     t = f()

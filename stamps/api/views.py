@@ -38,17 +38,17 @@ def search():
 
 @api_bp.route('/stats/themes')
 def stats_theme():
-    data = stats.theme()
+    data = stats.themes()
     return jsonify(data=data)
 
 
 @api_bp.route('/stats/countries')
 def stats_country():
-    data = stats.country()
+    data = stats.countries()
     return jsonify(data=data)
 
 
 @api_bp.route('/stats/years')
 def stats_year():
-    data = stats.year()
+    data = stats.years()
     return jsonify(data=data)
