@@ -30,6 +30,9 @@ def create_app(config):
     from stamps.api.views import api_bp
     app.register_blueprint(api_bp, url_prefix='/api')
 
+    from stamps.users.views import users
+    app.register_blueprint(users)
+
     from stamps.frontend import frontend
     app.register_blueprint(frontend)
 
