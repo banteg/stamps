@@ -10,9 +10,8 @@ def stamp(wns, extended=True):
     if not re.match('[A-Z]{2}\d{3}\.\d{2}', wns):
         return None
 
-    try:
-        data = next(db.stamps.find({'_id': wns}))
-    except StopIteration:
+    data = db.stamps.find_one(wns)
+    if data is None:
         return None
 
     if extended and 'set' in data:
@@ -26,23 +25,13 @@ def stamp(wns, extended=True):
 
 
 def themes():
-    primary_themes = db.stamps.distinct('primary_theme')
-    themes = db.stamps.distinct('theme')
-    data = {
-        'primary_themes': primary_themes,
-        'themes': themes,
-    }
-
-    return data
+    themes = db.stats.find_one('themes')['themes']
+    return {'themes': list(themes)}
 
 
 def countries():
-    countries = db.stamps.distinct('country')
-    data = {
-        'countries': countries,
-    }
-
-    return data
+    countries = db.stats.find_one('countries')['countries']
+    return {'countries': list(countries)}
 
 
 def year_filter(query):
