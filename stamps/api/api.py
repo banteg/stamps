@@ -26,12 +26,12 @@ def stamp(wns, extended=True):
 
 def themes():
     themes = db.stats.find_one('themes')['themes']
-    return {'themes': list(themes)}
+    return {'themes': sorted(themes)}
 
 
 def countries():
     countries = db.stats.find_one('countries')['countries']
-    return {'countries': list(countries)}
+    return {'countries': sorted(countries)}
 
 
 def year_filter(query):
